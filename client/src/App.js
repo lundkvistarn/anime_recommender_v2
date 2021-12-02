@@ -2,16 +2,18 @@ import React, { useState, useEffect } from "react";
 import PostForm from "./components/PostForm";
 
 function App() {
-  const [data, setData] = useState([{}]);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [currentTime2, setCurrentTime2] = useState(0);
+  const [currentTime3, setCurrentTime3] = useState(null);
 
-  /*   useEffect(() => {
-    fetch("/PostForm")
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-        console.log(data);
-      });
-  }, []); */
+  useEffect(() => {
+    fetch('/synopsis?name=Naruto&title=Test').then(res => res.json()).then(data => {
+      setCurrentTime(data.time);
+      setCurrentTime2(data.name);
+      setCurrentTime3(JSON.parse(data.name));
+      console.log(JSON.parse(data.name));
+    });
+  }, []);
 
   return (
     <div>
@@ -19,6 +21,8 @@ function App() {
         <p>Name:</p>
         <input name="nm" type="text"></input>
         <input type="submit" value="submit"></input>
+        <p>{currentTime}</p>
+        <p>{currentTime2}</p>
       </form>
     </div>
   );

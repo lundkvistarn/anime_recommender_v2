@@ -7,9 +7,11 @@ import numpy as np
 import pandas as pd
 
 #Läser in datan
-anime_info_df = pd.read_csv('anime.csv')
-anime_desc_df = pd.read_csv('anime_with_synopsis.csv')
-rating_df = pd.read_csv('rating_complete.csv')
+PROJECT_DIR = r'D:/Maskininlärning/anime_recommender_v2/flask-server/DB'
+anime_info_df = pd.read_csv(PROJECT_DIR + '/anime.csv', low_memory=True)
+anime_desc_df = pd.read_csv(
+    PROJECT_DIR + '/anime_with_synopsis.csv', low_memory=True)
+rating_df = pd.read_csv(PROJECT_DIR + '/rating_complete.csv', low_memory=True)
 
 # mergar dem olika datasetsen och displayar första 10
 anime_df = pd.merge(anime_desc_df, anime_info_df[[
@@ -70,4 +72,4 @@ def content_recommendations(title):
     qualified['wr'] = qualified.apply(weighted_rating, axis=1)
     qualified = qualified.sort_values('wr', ascending=False).head(10)
 
-    return qualified
+    return qualified.to_json(orient='split')
