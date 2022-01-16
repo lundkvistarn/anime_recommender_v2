@@ -29,20 +29,16 @@ def members():
 
 @app.route('/title')
 def get_recommend_title():
-    json = request.args.getlist('name')
-    json2 = request.args.getlist('title')
-    test = recommend.content_recommendations('Naruto')
-    print(test)
-    return {'time': json, 'name': test}
+    json2 = request.args.get('title')
+    recommender = recommend.content_recommendations(json2)
+    return {'name': recommender}
 
 
 @app.route('/synopsis')
 def get_recommend_synopsis():
-    json = request.args.getlist('name')
-    json2 = request.args.getlist('title')
-    test = synopsis.content_synopsis('Robots')
-    print(test)
-    return {'time': json, 'name': test}
+    json2 = request.args.get('title')
+    recommender = synopsis.content_synopsis(json2)
+    return {'name': recommender}
 
 
 if __name__ == "__main__":

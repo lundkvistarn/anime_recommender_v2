@@ -23,7 +23,18 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.main{
+margin-top: 3em;
+}
+.table{
+  margin-top: 3em;
+}
+.form{
 
+  width: 50%;
+  height: 50px;
+  background-color: #282;
+}
 .App-link {
   color: #61dafb;
 }

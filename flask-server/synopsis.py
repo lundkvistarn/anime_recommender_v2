@@ -10,14 +10,14 @@ anime_desc_df = pd.read_csv(
     PROJECT_DIR + '/anime_with_synopsis.csv', low_memory=True)
 rating_df = pd.read_csv(PROJECT_DIR + '/rating_complete.csv', low_memory=True)
 
-# mergar dem olika datasetsen och displayar första 10
+# mergar dem olika datasetsen
 anime_df = pd.merge(anime_desc_df, anime_info_df[[
                     'MAL_ID', 'Type', 'Popularity', 'Members', 'Favorites']], on='MAL_ID')
 
 # Tar bort alla som har unknown score
 anime_df = anime_df[(anime_df["Score"] != "Unknown")]
 
-# Om det inte finns någon beskrivning så lääger vi till ''
+# Om det inte finns någon beskrivning så lägger vi till ''
 anime_df['sypnopsis'] = anime_df['sypnopsis'].fillna('')
 
 
@@ -70,4 +70,4 @@ def content_synopsis(title):
     qualified['wr'] = qualified.apply(weighted_rating, axis=1)
     qualified = qualified.sort_values('wr', ascending=False).head(10)
 
-    return qualified.to_json(orient='split')
+    return qualified.to_json(orient='table')

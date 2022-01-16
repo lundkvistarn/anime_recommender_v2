@@ -72,4 +72,4 @@ def content_recommendations(title):
     qualified['wr'] = qualified.apply(weighted_rating, axis=1)
     qualified = qualified.sort_values('wr', ascending=False).head(10)
 
-    return qualified.to_json(orient='split')
+    return qualified.to_json(orient='table')
